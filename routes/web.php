@@ -18,3 +18,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/home-ads', 'HomeAdController@index')->name('home-ads.index');
+//
+//Route::get('/home-ads/{id}', 'HomeAdController@show')->name('home-ad-show');
+//
+//Route::get('/home-ads/create', 'HomeAdController@create')->name('home-ad-create');
+//
+////Route::post('/home-ads/create', function(App\Http\Requests\CreateHomeAdRequest $request){
+////    //$newHomeAd = \App\HomeAd::create($request->only(['city']));
+////    return view('home-ad-list');
+////});
+//
+//Route::post('/home-ads', 'HomeAdController@store')->name('home-ads.store');
+
+Route::resource('home-ads', 'HomeAdController');

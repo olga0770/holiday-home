@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\HomeAd;
+use App\Http\Requests\CreateHomeAdRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+
+class HomeAdController extends Controller
+{
+
+    # todo  see #3 in Laravel Up & Running
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function index()
+    {
+        Log::debug('In HomeAdController::index');
+        // show all homes
+        return view('home-ad-list', ['homes' => DB::table('home_ad')->paginate(10)]);
+    }
+
+    public function create() {
+        Log::debug('In HomeAdController::create');
+        return view('home-ad-create');
+    }
+
+    public function show($id)
+    {
+        Log::debug('In HomeAdController::show');
+        #/home-ads/{id}
+        return HomeAd::findOrFail($id);
+    }
+
+    public function store(CreateHomeAdRequest $request)
+    {
+        Log::debug('In HomeAdController::store');
+        $homeAd = new HomeAd();
+        $homeAd->setCity($request->input('city'));
+        $homeAd->save();
+
+        return $this->index();
+        //return redirect('/');
+    }
+
+}
