@@ -16,8 +16,8 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'single'),
-    //'default' => env('LOG_CHANNEL', 'stack'),
+    //'default' => env('LOG_CHANNEL', 'single'),
+    'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
@@ -49,8 +49,8 @@ return [
 
         'daily' => [
             'driver' => 'daily',
-            'path' => '/home/admin/tmp/laravel.log',
-            //'path' => storage_path('logs/laravel.log'),
+            //'path' => '/home/admin/tmp/laravel.log',
+            'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
             'days' => 14,
         ],
