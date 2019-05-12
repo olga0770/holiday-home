@@ -22,7 +22,7 @@
                         @endforeach
                     </table>
 
-{{--                    {{ $homes->links() }}--}}
+                    {{ $homes->links() }}
 
                     <a href="/home-ads/create">Create Home Advertisement!</a>
 

@@ -11,25 +11,19 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('home-ad-list', ['homes' => DB::table('home_ads')->paginate(10)]);
 });
 
 Auth::routes();
 
+// Dashboard of authenticated user
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/home-ads', 'HomeAdController@index')->name('home-ads.index');
-//
-//Route::get('/home-ads/{id}', 'HomeAdController@show')->name('home-ad-show');
-//
-//Route::get('/home-ads/create', 'HomeAdController@create')->name('home-ad-create');
-//
-////Route::post('/home-ads/create', function(App\Http\Requests\CreateHomeAdRequest $request){
-////    //$newHomeAd = \App\HomeAd::create($request->only(['city']));
-////    return view('home-ad-list');
-////});
-//
-//Route::post('/home-ads', 'HomeAdController@store')->name('home-ads.store');
 
+// https://laravel.com/docs/5.8/controllers
 Route::resource('home-ads', 'HomeAdController');
