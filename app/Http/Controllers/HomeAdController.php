@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\HomeAd;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as ResponseAlias;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -49,6 +50,8 @@ class HomeAdController extends Controller
         $homeAd = new HomeAd;
 
         $homeAd->city = $request->input('city');
+        $homeAd->country = $request->input('country');
+        $homeAd->user_id = Auth::id();
         $homeAd->save();
 
         return $this->index();
@@ -64,6 +67,7 @@ class HomeAdController extends Controller
     {
         Log::debug('In HomeAdController::show');
         //return HomeAd::findOrFail($id);
+        return null;
     }
 
     /**
@@ -75,6 +79,7 @@ class HomeAdController extends Controller
     public function edit(HomeAd $homeAd)
     {
         Log::debug('In HomeAdController::edit');
+        return null;
     }
 
     /**
@@ -87,6 +92,7 @@ class HomeAdController extends Controller
     public function update(Request $request, HomeAd $homeAd)
     {
         Log::debug('In HomeAdController::update');
+        return null;
     }
 
     /**
@@ -98,5 +104,6 @@ class HomeAdController extends Controller
     public function destroy(HomeAd $homeAd)
     {
         Log::debug('In HomeAdController::destroy');
+        return null;
     }
 }

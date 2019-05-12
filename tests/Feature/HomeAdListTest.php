@@ -10,7 +10,8 @@ class HomeAdListTest extends TestCase
 {
 
 
-    public function testBasicTest()
+    /** @test */
+    public function can_see_list_of_ads_as_guest()
     {
         $response = $this->get('/home-ads');
 

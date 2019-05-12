@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Holiday Homes!</div>
+                <div class="card-header">Holiday Homes for Rent!</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,11 +14,16 @@
                         </div>
                     @endif
 
-                    List of all homes.
-
                     <table>
+                        <tr>
+                            <th>City</th>
+                            <th>Country</th>
+                        </tr>
                         @foreach ($homes as $home)
-                            <tr><td>{{ $home->city}}</td></tr>
+                            <tr>
+                                <td>{{ $home->city}}</td>
+                                <td>{{ $home->country}}</td>
+                            </tr>
                         @endforeach
                     </table>
 

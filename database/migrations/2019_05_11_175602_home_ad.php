@@ -16,6 +16,8 @@ class HomeAd extends Migration
         Schema::create('home_ads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('city');
+            $table->string('country');
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }

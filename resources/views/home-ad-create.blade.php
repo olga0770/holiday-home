@@ -20,6 +20,8 @@
 
                         <label for="city">City</label>
                         <input id="city" name="city" type="text">
+                        <label>Country</label>
+                        <input name="country" type="text">
 
                         <button type="submit">Post</button>
 
