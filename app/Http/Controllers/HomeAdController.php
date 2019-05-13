@@ -54,7 +54,7 @@ class HomeAdController extends Controller
         $homeAd->user_id = Auth::id();
         $homeAd->save();
 
-        return $this->index();
+        return view('home');
     }
 
     /**
@@ -98,7 +98,7 @@ class HomeAdController extends Controller
         $homeAd->country = $request->input('country');
         $homeAd->save();
 
-        return $this->index();
+        return view('home');
     }
 
 
@@ -121,6 +121,6 @@ class HomeAdController extends Controller
         Log::debug('In HomeAdController::destroy');
         $homeAd->delete();
 
-        return $this->index();
+        return view('home');
     }
 }
