@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
@@ -23,6 +24,8 @@ Auth::routes();
 
 // Dashboard of authenticated user
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home/ads', 'HomeController@userAds')->name('home-user-ads');
 
 
 // https://laravel.com/docs/5.8/controllers

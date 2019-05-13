@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <a href="/home/ads">My Ads</a>
                 </div>
             </div>
         </div>
