@@ -112,12 +112,15 @@ class HomeAdController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\HomeAd  $homeAd
+     * @param \App\HomeAd $homeAd
      * @return ResponseAlias
+     * @throws \Exception
      */
     public function destroy(HomeAd $homeAd)
     {
         Log::debug('In HomeAdController::destroy');
-        return null;
+        $homeAd->delete();
+
+        return $this->index();
     }
 }
