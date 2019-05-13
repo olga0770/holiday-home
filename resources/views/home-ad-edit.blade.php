@@ -14,18 +14,19 @@
                         </div>
                     @endif
 
-                    <form action="/home-ads" method="post">
+                    <form action="/home-ads/{{$id}}" method="post">
+                        @method('PUT')
 
                         @csrf
 
                         <label>City
-                            <input name="city" type="text">
+                            <input name="city" type="text" value="{{$city}}">
                         </label>
                         <label>Country
-                            <input name="country" type="text">
+                            <input name="country" type="text" value="{{$country}}">
                         </label>
 
-                        <button type="submit">Post</button>
+                        <button type="submit">Edit</button>
 
 
                     </form>

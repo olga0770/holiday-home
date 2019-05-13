@@ -79,7 +79,8 @@ class HomeAdController extends Controller
     public function edit(HomeAd $homeAd)
     {
         Log::debug('In HomeAdController::edit');
-        return null;
+        return view('home-ad-edit')->with('id', $homeAd->id)->with('city', $homeAd->city)
+                                        ->with('country', $homeAd->country);
     }
 
     /**
@@ -92,7 +93,20 @@ class HomeAdController extends Controller
     public function update(Request $request, HomeAd $homeAd)
     {
         Log::debug('In HomeAdController::update');
-        return null;
+
+        $homeAd->city = $request->input('city');
+        $homeAd->country = $request->input('country');
+        $homeAd->save();
+
+        return $this->index();
+    }
+
+
+    public function delete(Request $request)
+    {
+        Log::debug('In HomeAdController::delete');
+        return view('home-ad-delete')->with('id', $request->get('id'))->with('city', $request->get('city'))
+            ->with('country', $request->get('country'));
     }
 
     /**

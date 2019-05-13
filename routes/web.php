@@ -30,3 +30,5 @@ Route::get('/home/ads', 'HomeController@userAds')->name('home-user-ads');
 
 // https://laravel.com/docs/5.8/controllers
 Route::resource('home-ads', 'HomeAdController');
+
+Route::get('/home-ads/{id}/delete', 'HomeAdController@delete');

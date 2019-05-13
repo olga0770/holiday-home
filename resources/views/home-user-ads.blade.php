@@ -16,13 +16,18 @@
 
                     <table>
                         <tr>
+                            <th>Id</th>
                             <th>City</th>
                             <th>Country</th>
                         </tr>
                         @foreach ($homes as $home)
                             <tr>
-                                <td>{{ $home->city}}</td>
-                                <td>{{ $home->country}}</td>
+                                <td>{{$home->id}}</td>
+                                <td>{{$home->city}}</td>
+                                <td>{{$home->country}}</td>
+                                <td><a href="/home-ads/{{{$home->id}}}/edit">Edit</a></td>
+                                <td><a href="/home-ads/{{{$home->id}}}/delete?id={{$home->id}}&city={{$home->city}}&country={{$home->country}}">
+                                        Delete</a></td>
                             </tr>
                         @endforeach
                     </table>

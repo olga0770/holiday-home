@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Post Your Home Advertisement!</div>
+                <div class="card-header">Delete Home Advertisement</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,18 +14,22 @@
                         </div>
                     @endif
 
-                    <form action="/home-ads" method="post">
+                    <form action="/home-ads/{{$id}}" method="post">
+                        @method('DELETE')
 
                         @csrf
 
+                        <label>Id
+                            <input readonly name="id" type="text" value="{{$id}}">
+                        </label>
                         <label>City
-                            <input name="city" type="text">
+                            <input readonly name="city" type="text" value="{{$city}}">
                         </label>
                         <label>Country
-                            <input name="country" type="text">
+                            <input readonly name="country" type="text" value="{{$country}}">
                         </label>
 
-                        <button type="submit">Post</button>
+                        <button type="submit">Delete!</button>
 
 
                     </form>
