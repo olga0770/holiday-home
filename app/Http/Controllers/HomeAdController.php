@@ -8,6 +8,7 @@ use Illuminate\Http\Response as ResponseAlias;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\MessageBag;
 
 class HomeAdController extends Controller
 {
@@ -96,6 +97,28 @@ class HomeAdController extends Controller
 
         $homeAd->city = $request->input('city');
         $homeAd->country = $request->input('country');
+
+
+        if ($request->hasFile('home_picture') &&
+            $request->file('home_picture')->isValid()) {
+
+            if ($request->file('home_picture')->getSize() > 500000) {
+                $messages = [
+                    'errors' => [
+                        'Image is too big!',
+                    ],
+                ];
+                $messagebag = new MessageBag($messages);
+//                var_dump($messagebag);
+//                return;
+                return view('home-ad-edit')->withErrors($messagebag)->with('id', $homeAd->id)->with('city', $homeAd->city)->with('country', $homeAd->country);
+            }
+            else {
+                $path = $request->home_picture->store('images');
+                $homeAd->image_name = $path;
+            }
+        }
+
         $homeAd->save();
 
         return view('home');
