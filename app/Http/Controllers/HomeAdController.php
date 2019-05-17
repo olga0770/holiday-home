@@ -53,6 +53,14 @@ class HomeAdController extends Controller
         $homeAd->city = $request->input('city');
         $homeAd->country = $request->input('country');
         $homeAd->user_id = Auth::id();
+
+        $messagebag = $this->handleImage($request, $homeAd);
+
+        if ($messagebag->isNotEmpty()) {
+            return view('home-ad-create')->withErrors($messagebag)->with('city', $homeAd->city)->with('country', $homeAd->country);
+        }
+
+
         $homeAd->save();
 
         return view('home');
@@ -81,7 +89,8 @@ class HomeAdController extends Controller
     {
         Log::debug('In HomeAdController::edit');
         return view('home-ad-edit')->with('id', $homeAd->id)->with('city', $homeAd->city)
-                                        ->with('country', $homeAd->country);
+                                        ->with('country', $homeAd->country)
+                                        ->with('image_name', $homeAd->image_name);
     }
 
     /**
@@ -98,25 +107,10 @@ class HomeAdController extends Controller
         $homeAd->city = $request->input('city');
         $homeAd->country = $request->input('country');
 
+        $messagebag = $this->handleImage($request, $homeAd);
 
-        if ($request->hasFile('home_picture') &&
-            $request->file('home_picture')->isValid()) {
-
-            if ($request->file('home_picture')->getSize() > 500000) {
-                $messages = [
-                    'errors' => [
-                        'Image is too big!',
-                    ],
-                ];
-                $messagebag = new MessageBag($messages);
-//                var_dump($messagebag);
-//                return;
-                return view('home-ad-edit')->withErrors($messagebag)->with('id', $homeAd->id)->with('city', $homeAd->city)->with('country', $homeAd->country);
-            }
-            else {
-                $path = $request->home_picture->store('images');
-                $homeAd->image_name = $path;
-            }
+        if ($messagebag->isNotEmpty()) {
+            return view('home-ad-edit')->withErrors($messagebag)->with('id', $homeAd->id)->with('city', $homeAd->city)->with('country', $homeAd->country);
         }
 
         $homeAd->save();
@@ -145,5 +139,27 @@ class HomeAdController extends Controller
         $homeAd->delete();
 
         return view('home');
+    }
+
+    /**
+     * @param Request $request
+     * @param HomeAd $homeAd
+     * @return MessageBag
+     */
+    public function handleImage(Request $request, HomeAd $homeAd): MessageBag
+    {
+        $messagebag = new MessageBag();
+
+        if ($request->hasFile('home_picture') &&
+            $request->file('home_picture')->isValid()) {
+
+            if ($request->file('home_picture')->getSize() > 500000) {
+                $messagebag->add('image-size', 'Image is too big!');
+            } else {
+                $path = $request->home_picture->store('public/images');
+                $homeAd->image_name = basename($path);
+            }
+        }
+        return $messagebag;
     }
 }
