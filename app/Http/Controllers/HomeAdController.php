@@ -52,14 +52,15 @@ class HomeAdController extends Controller
 
         $homeAd->city = $request->input('city');
         $homeAd->country = $request->input('country');
+        $homeAd->postal_code = $request->input('postal_code');
         $homeAd->user_id = Auth::id();
 
         $messagebag = $this->handleImage($request, $homeAd);
 
         if ($messagebag->isNotEmpty()) {
-            return view('home-ad-create')->withErrors($messagebag)->with('city', $homeAd->city)->with('country', $homeAd->country);
+            return view('home-ad-create')->withErrors($messagebag)
+                        ->with('city', $homeAd->city)->with('country', $homeAd->country)->with('postal_code', $homeAd->postal_code);
         }
-
 
         $homeAd->save();
 
@@ -90,6 +91,7 @@ class HomeAdController extends Controller
         Log::debug('In HomeAdController::edit');
         return view('home-ad-edit')->with('id', $homeAd->id)->with('city', $homeAd->city)
                                         ->with('country', $homeAd->country)
+                                        ->with('postal_code', $homeAd->postal_code)
                                         ->with('image_name', $homeAd->image_name);
     }
 
@@ -110,7 +112,9 @@ class HomeAdController extends Controller
         $messagebag = $this->handleImage($request, $homeAd);
 
         if ($messagebag->isNotEmpty()) {
-            return view('home-ad-edit')->withErrors($messagebag)->with('id', $homeAd->id)->with('city', $homeAd->city)->with('country', $homeAd->country);
+            return view('home-ad-edit')->withErrors($messagebag)
+                ->with('id', $homeAd->id)->with('city', $homeAd->city)
+                ->with('country', $homeAd->country)->with('postal_code', $homeAd->postal_code);
         }
 
         $homeAd->save();
@@ -123,7 +127,7 @@ class HomeAdController extends Controller
     {
         Log::debug('In HomeAdController::delete');
         return view('home-ad-delete')->with('id', $request->get('id'))->with('city', $request->get('city'))
-            ->with('country', $request->get('country'));
+                ->with('country', $request->get('country'))->with('postal_code', $request->get('postal_code'));
     }
 
     /**

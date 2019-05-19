@@ -18,11 +18,13 @@
                         <tr>
                             <th>City</th>
                             <th>Country</th>
+                            <th>Postal Code</th>
                         </tr>
                         @foreach ($homes as $home)
                             <tr>
                                 <td>{{ $home->city}}</td>
                                 <td>{{ $home->country}}</td>
+                                <td>{{ $home->postal_code}}</td>
                             </tr>
                         @endforeach
                     </table>

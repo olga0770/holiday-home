@@ -34,6 +34,9 @@
                         <label>Country
                             <input name="country" type="text">
                         </label>
+                        <label>Postal Code
+                            <input name="postal_code" type="text">
+                        </label>
 
                         <input type="file" name="home_picture">
 

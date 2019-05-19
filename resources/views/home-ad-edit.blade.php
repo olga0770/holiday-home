@@ -35,6 +35,9 @@
                         <label>Country
                             <input name="country" type="text" value="{{$country}}">
                         </label>
+                        <label>Postal Code
+                            <input name="postal_code" type="text" value="{{$postal_code}}">
+                        </label>
 
                         @if (!empty($image_name))
                             <img class="img-responsive" src="{{URL::to('/storage/images/')}}/{{$image_name}}" alt="a picture of the holiday home"/>

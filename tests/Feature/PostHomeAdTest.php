@@ -31,12 +31,13 @@ class PostHomeAdTest extends TestCase
         $response->assertOk();
         $response->assertSee('City');
         $response->assertSee('Country');
+        $response->assertSee('Postal Code');
     }
 
     /** @test */
     public function post_fails_when_not_authenticated()
     {
-        $response = $this->post('/home-ads', ['city'=>'Copenhagen', 'country' => 'Sweden']);
+        $response = $this->post('/home-ads', ['city'=>'Copenhagen', 'country' => 'Sweden', 'postal_code' => '2930']);
 
         $response->assertRedirect('/login');
     }
@@ -44,12 +45,12 @@ class PostHomeAdTest extends TestCase
     /** @test */
     public function post_works_when_authenticated_as_tester()
     {
-        $this->assertDatabaseMissing('home_ads',['city' => 'Copenhagen', 'country' => 'Sweden']);
+        $this->assertDatabaseMissing('home_ads',['city' => 'Copenhagen', 'country' => 'Sweden', 'postal_code' => '2930']);
         $user = factory(User::class)->create();
-        $response = $this->actingAs($user)->post('/home-ads', ['city'=>'Copenhagen', 'country' => 'Sweden']);
+        $response = $this->actingAs($user)->post('/home-ads', ['city'=>'Copenhagen', 'country' => 'Sweden', 'postal_code' => '2930']);
 
         $response->assertOk();
-        $this->assertDatabaseHas('home_ads',['city' => 'Copenhagen', 'country' => 'Sweden']);
+        $this->assertDatabaseHas('home_ads',['city' => 'Copenhagen', 'country' => 'Sweden', 'postal_code' => '2930']);
     }
 
 }

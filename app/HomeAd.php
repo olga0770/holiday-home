@@ -17,6 +17,7 @@ class HomeAd extends Model
     protected $fillable = [
         'city',
         'country',
+        'postal_code',
     ];
 
     public function user()

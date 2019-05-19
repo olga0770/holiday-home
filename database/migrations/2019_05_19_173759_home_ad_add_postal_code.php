@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ImageTable extends Migration
+class HomeAdAddPostalCode extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class ImageTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_ad_images', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->binary('image64');
+        Schema::table('home_ads', function(Blueprint $table) {
+            $table->string('postal_code')->nullable();
         });
     }
 
@@ -26,6 +25,8 @@ class ImageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home_ad_images');
+        Schema::table('home_ads', function(Blueprint $table) {
+            $table->dropColumn('postal_code');
+        });
     }
 }

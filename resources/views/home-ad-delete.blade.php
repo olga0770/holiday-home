@@ -28,6 +28,9 @@
                         <label>Country
                             <input readonly name="country" type="text" value="{{$country}}">
                         </label>
+                        <label>Postal Code
+                            <input readonly name="postal_code" type="text" value="{{$postal_code}}">
+                        </label>
 
                         <button type="submit">Delete!</button>
 

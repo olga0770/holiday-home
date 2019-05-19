@@ -19,12 +19,14 @@
                             <th>Id</th>
                             <th>City</th>
                             <th>Country</th>
+                            <th>Postal Code</th>
                         </tr>
                         @foreach ($homes as $home)
                             <tr>
                                 <td>{{$home->id}}</td>
                                 <td>{{$home->city}}</td>
                                 <td>{{$home->country}}</td>
+                                <td>{{$home->postal_code}}</td>
                                 <td><a href="/home-ads/{{{$home->id}}}/edit">Edit</a></td>
                                 <td><a href="/home-ads/{{{$home->id}}}/delete?id={{$home->id}}&city={{$home->city}}&country={{$home->country}}">
                                         Delete</a></td>
