@@ -189,7 +189,7 @@ class HomeAdController extends Controller
                 }
                 else {
                     if (empty($homeAd->image_name)) {
-                        $image_name = uniqid($homeAd->id . '_');
+                        $image_name = uniqid();
                     }
                     else {
                         $image_name = $homeAd->image_name;
