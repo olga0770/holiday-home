@@ -18,6 +18,11 @@ class AmazonS3Test extends TestCase
      */
     public function testExample()
     {
+//        $exists = Storage::disk('s3')->exists('images/1_5ce454edb8eed');
+//        $this->assertTrue($exists);
+//
+//        $contents = Storage::disk('s3')->get('images/1_5ce454edb8eed');
+//        var_dump(base64_encode($contents));
 
 //        Storage::disk('s3')->put('avatars/1', 'hello-avatar');
 

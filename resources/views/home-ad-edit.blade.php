@@ -39,8 +39,10 @@
                             <input name="postal_code" type="text" value="{{$postal_code}}">
                         </label>
 
-                        @if (!empty($image_name))
+                        @if (!empty($image_url_prefix))
                             <img class="img-responsive" src="{{$image_url_prefix}}/{{$image_name}}" alt="a picture of the holiday home"/>
+                        @else
+                            <img class="img-responsive" src="data:image/png;base64, {{$base_64_img}}" alt="a picture of the holiday home"/>
                         @endif
 
                         <input type="file" name="home_picture">

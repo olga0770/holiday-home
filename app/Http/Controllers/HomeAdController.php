@@ -93,15 +93,19 @@ class HomeAdController extends Controller
         Log::debug('In HomeAdController::edit');
         if (env('APP_ENV') == 'local') {
             $image_url_prefix = URL::to('/storage/images/');
+            $base_64_img = '';
         }
         else {
-            $image_url_prefix = 'https://s3.eu-central-1.amazonaws.com/obs-holiday-home/images';
+            $contents = Storage::disk('s3')->get('images/'.$homeAd->image_name);
+            $base_64_img = base64_encode($contents);
+            $image_url_prefix = '';
         }
 
         return view('home-ad-edit')->with('id', $homeAd->id)->with('city', $homeAd->city)
                                         ->with('country', $homeAd->country)
                                         ->with('postal_code', $homeAd->postal_code)
                                         ->with('image_url_prefix', $image_url_prefix)
+                                        ->with('base_64_img', $base_64_img)
                                         ->with('image_name', $homeAd->image_name);
 
         // URL::to('/storage/images/')/image_name
