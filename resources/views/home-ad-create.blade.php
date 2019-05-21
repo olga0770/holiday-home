@@ -29,13 +29,13 @@
                         @csrf
 
                         <label>City
-                            <input name="city" type="text">
+                            <input name="city" type="text" value="{{$city}}">
                         </label>
                         <label>Country
-                            <input name="country" type="text">
+                            <input name="country" type="text" value="{{$country}}">
                         </label>
                         <label>Postal Code
-                            <input name="postal_code" type="text">
+                            <input name="postal_code" type="text" value="{{$postal_code}}">
                         </label>
 
                         <input type="file" name="home_picture">

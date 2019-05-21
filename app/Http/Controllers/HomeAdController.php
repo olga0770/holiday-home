@@ -38,7 +38,7 @@ class HomeAdController extends Controller
     public function create()
     {
         Log::debug('In HomeAdController::create');
-        return view('home-ad-create');
+        return view('home-ad-create')->with('city', '')->with('country', '')->with('postal_code', '');
     }
 
     /**
@@ -124,6 +124,7 @@ class HomeAdController extends Controller
 
         $homeAd->city = $request->input('city');
         $homeAd->country = $request->input('country');
+        $homeAd->postal_code = $request->input('postal_code');
 
         $messagebag = $this->handleImage($request, $homeAd);
 
