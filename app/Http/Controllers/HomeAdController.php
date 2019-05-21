@@ -176,6 +176,7 @@ class HomeAdController extends Controller
             if ($request->file('home_picture')->getSize() > 500000) {
                 $messagebag->add('image-size', 'Image is too big!');
             } else {
+                // todo  if $homeAd->image_name then use that
                 if (env('APP_ENV')=='local') {
                     $path = $request->home_picture->store('public/images');
                     $image_name = basename($path);
