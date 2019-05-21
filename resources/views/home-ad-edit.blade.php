@@ -40,7 +40,7 @@
                         </label>
 
                         @if (!empty($image_name))
-                            <img class="img-responsive" src="{{URL::to('/storage/images/')}}/{{$image_name}}" alt="a picture of the holiday home"/>
+                            <img class="img-responsive" src="{{$image_url_prefix}}/{{$image_name}}" alt="a picture of the holiday home"/>
                         @endif
 
                         <input type="file" name="home_picture">

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\MessageBag;
 
 class HomeAdController extends Controller
@@ -90,10 +91,20 @@ class HomeAdController extends Controller
     public function edit(HomeAd $homeAd)
     {
         Log::debug('In HomeAdController::edit');
+        if (env('APP_ENV') == 'local') {
+            $image_url_prefix = URL::to('/storage/images/');
+        }
+        else {
+            $image_url_prefix = 'https://s3.eu-central-1.amazonaws.com/obs-holiday-home/images';
+        }
+
         return view('home-ad-edit')->with('id', $homeAd->id)->with('city', $homeAd->city)
                                         ->with('country', $homeAd->country)
                                         ->with('postal_code', $homeAd->postal_code)
+                                        ->with('image_url_prefix', $image_url_prefix)
                                         ->with('image_name', $homeAd->image_name);
+
+        // URL::to('/storage/images/')/image_name
     }
 
     /**
