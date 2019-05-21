@@ -177,13 +177,23 @@ class HomeAdController extends Controller
             if ($request->file('home_picture')->getSize() > 500000) {
                 $messagebag->add('image-size', 'Image is too big!');
             } else {
-                // todo  if $homeAd->image_name then use that
                 if (env('APP_ENV')=='local') {
-                    $path = $request->home_picture->store('public/images');
-                    $image_name = basename($path);
+                    if (empty($homeAd->image_name)) {
+                        $path = $request->home_picture->store('public/images');
+                        $image_name = basename($path);
+                    }
+                    else {
+                        $image_name = $homeAd->image_name;
+                        $request->home_picture->storeAs('public/images', $image_name);
+                    }
                 }
                 else {
-                    $image_name = uniqid($homeAd->id . '_');
+                    if (empty($homeAd->image_name)) {
+                        $image_name = uniqid($homeAd->id . '_');
+                    }
+                    else {
+                        $image_name = $homeAd->image_name;
+                    }
                     $request->home_picture->storeAs('images', $image_name, 's3');
                 }
                 $homeAd->image_name = $image_name;
