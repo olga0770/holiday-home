@@ -8,6 +8,7 @@ use Illuminate\Http\Response as ResponseAlias;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\MessageBag;
 
 class HomeAdController extends Controller
@@ -160,8 +161,15 @@ class HomeAdController extends Controller
             if ($request->file('home_picture')->getSize() > 500000) {
                 $messagebag->add('image-size', 'Image is too big!');
             } else {
-                $path = $request->home_picture->store('public/images');
-                $homeAd->image_name = basename($path);
+                if (env('APP_ENV')=='local') {
+                    $path = $request->home_picture->store('public/images');
+                    $image_name = basename($path);
+                }
+                else {
+                    $image_name = uniqid($homeAd->id . '_');
+                    $request->home_picture->storeAs('images', $image_name, 's3');
+                }
+                $homeAd->image_name = $image_name;
             }
         }
         return $messagebag;
