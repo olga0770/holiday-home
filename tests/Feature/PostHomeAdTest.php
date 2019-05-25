@@ -23,7 +23,7 @@ class PostHomeAdTest extends TestCase
     }
 
     /** @test */
-    public function can_reach_home_ad_form_when_authenticated_as_tester()
+    public function can_reach_home_ad_form_when_authenticated()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/home-ads/create');
@@ -43,7 +43,7 @@ class PostHomeAdTest extends TestCase
     }
 
     /** @test */
-    public function post_works_when_authenticated_as_tester()
+    public function post_works_when_authenticated()
     {
         $this->assertDatabaseMissing('home_ads',['city' => 'Copenhagen', 'country' => 'Sweden', 'postal_code' => '2930']);
         $user = factory(User::class)->create();

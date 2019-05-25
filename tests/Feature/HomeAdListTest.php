@@ -17,7 +17,7 @@ class HomeAdListTest extends TestCase
     {
         $response = $this->get('/home-ads');
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee('Holiday');
         $response->assertDontSee('Laravel');
     }
